@@ -10,17 +10,32 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+/**
+ * Klassen tar en bild på input, ändrar varje pixels contrast och brightness 
+ * och skriver ut den ändrade bilden
+ * @author filip heidfors
+ *
+ */
 public class FlipImage {
-	private static BufferedImage image;
-
-	public static BufferedImage getImage() {
-		return image;
-	}
-
+//	private static BufferedImage image;
+//
+//	public static BufferedImage getImage() {
+//		return image;
+//	}
+	
+	/**
+	 * Metoden ändrar varje pixel i en originalbild och skriver ut den nya bilden 
+	 * @param img Originalbilden
+	 * @param c Contrast
+	 * @param b Brightness
+	 */
 	public static void flipImage(BufferedImage img, float c, int b) {		
-		RescaleOp rescaleOp = new RescaleOp(c, b, null);
+		//rescaleOp.filter gör att för varje komponent i varje pixel, multiplicera med c och plussa med b.
+		// g(x) = c * f(x) + b, där f(x) är komponenten i pixeln och c är kontrast värdet och b är brightness
+		RescaleOp rescaleOp = new RescaleOp(c, b, null); 
 		img = rescaleOp.filter(img, null);
 		
+		//Skriv ut den ändrade bilden
 		try {
 			ImageIO.write(img, "PNG", new File("images/changed_image.png"));
 		} catch (IOException e) {

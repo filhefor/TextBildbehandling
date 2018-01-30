@@ -1,5 +1,10 @@
 package tries;
 
+/**
+ * Testklass för att testa Trie.java
+ * @author filip heidfors
+ *
+ */
 public class TestTrie {
 	public static void main(String[] args) {
 		Trie trie = new Trie();

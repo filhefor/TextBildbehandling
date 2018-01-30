@@ -32,8 +32,7 @@ public class HuffmanImage {
 				String red = Integer.toBinaryString(raster.getSample(i, j, 0));
 				String green = Integer.toBinaryString(raster.getSample(i, j, 1));
 				String blue = Integer.toBinaryString(raster.getSample(i, j, 2));
-				//KOMPLETTERINGSKOD. LÄGGER TILL NOLLOR FRAMFÖR OM BITSTRÄNGEN ÄR MINDRE ÄN 8,
-				//SÅ ATT BITSTÄNGEN BLIR 8 BITAR FÖR VARJE FÄRG.
+
 				if(red.length() < 8) {
 					int index = 8-red.length();
 					red = completeBinaryString[index] + red;
@@ -46,7 +45,7 @@ public class HuffmanImage {
 					int index = 8-blue.length();
 					blue = completeBinaryString[index] + blue;
 				}
-				//KOMPLETTERINGSKOD SLUT
+
 				String pixelString = red + green + blue;
 				originalBitstring.append(pixelString);
 				// System.out.println(pixelString);
@@ -66,7 +65,6 @@ public class HuffmanImage {
 	}
 
 	private static Node buildTrie(HashMap<String, Integer> freq) {
-		// Initialize priority queue with singleton trees.
 		MinPQ<Node> pq = new MinPQ<Node>();
 		System.out.println("FREQUENCIES");
 		for (String s : freq.keySet()) {
@@ -76,7 +74,7 @@ public class HuffmanImage {
 
 		System.out.println();
 
-		while (pq.size() > 1) { // Merge two smallest trees.
+		while (pq.size() > 1) { 
 			Node x = pq.delMin();
 			Node y = pq.delMin();
 			Node parent = new Node("\0", x.freq + y.freq, x, y);
@@ -97,7 +95,6 @@ public class HuffmanImage {
 	}
 
 	public void compress(BufferedImage img) {
-		// Build Huffman code trie.
 		Node root = buildTrie(freq);
 
 		// System.out.println("PIXELVÄRDENAS BITSTRINGS:");
@@ -135,8 +132,8 @@ public class HuffmanImage {
 	}
 
 	private static class Node implements Comparable<Node> {
-		private String pixelBitstring; // unused for internal nodes
-		private int freq; // unused for expand
+		private String pixelBitstring; 
+		private int freq; 
 		private final Node left, right;
 
 		Node(String rgb, int freq, Node left, Node right) {
